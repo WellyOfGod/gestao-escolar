@@ -23,12 +23,16 @@ class LoginController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
 
+
         if(auth()->attempt($credentials, isset($request->remember)))
         {
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect()->route(
+                auth()->user()->is_admin ? 'admin' : 'home'
+            );
         }
+
 
         return back()->with('error', 'Dados informado inválidos!');
     }
