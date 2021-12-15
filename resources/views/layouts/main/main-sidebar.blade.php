@@ -12,9 +12,9 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>CADASTRO</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{route('student.create')}}">Aluno</a></li>
-                    <li><a class="nav-link" href="index.html">Curso</a></li>
-                    <li><a class="nav-link" href="index.html">Disciplina</a></li>
-                    <li><a class="nav-link" href="index.html">Atividade</a></li>
+                    <li><a class="nav-link" href="{{route('course.create')}}">Curso</a></li>
+                    <li><a class="nav-link" href="{{route('discipline.create')}}">Disciplina</a></li>
+                    <li><a class="nav-link" href="{{route('activity.create')}}">Atividade</a></li>
                 </ul>
             </li>
         </ul>
