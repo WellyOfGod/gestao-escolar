@@ -9,12 +9,12 @@
         <ul class="sidebar-menu">
             <li class="menu-header">Educacional</li>
             <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>CADASTROS</span></a>
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>CADASTRO</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{}}">Alunos</a></li>
-                    <li><a class="nav-link" href="index.html">Cursos</a></li>
-                    <li><a class="nav-link" href="index.html">Disciplinas</a></li>
-                    <li><a class="nav-link" href="index.html">Atividades</a></li>
+                    <li><a class="nav-link" href="{{route('student.create')}}">Aluno</a></li>
+                    <li><a class="nav-link" href="index.html">Curso</a></li>
+                    <li><a class="nav-link" href="index.html">Disciplina</a></li>
+                    <li><a class="nav-link" href="index.html">Atividade</a></li>
                 </ul>
             </li>
         </ul>
