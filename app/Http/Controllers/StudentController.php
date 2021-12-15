@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentStoreRequest;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -17,7 +16,7 @@ class StudentController extends Controller
 
     public function create()
     {
-        return view('pages.users.crud_students', [
+        return view('pages.admin.crud_students', [
             'route'   => route('student.store'),
         ]);
     }
@@ -39,7 +38,7 @@ class StudentController extends Controller
 
     public function edit(Student $student)
     {
-        return view('pages.users.crud_students', [
+        return view('pages.admin.crud_students', [
             'route'   => route('student.update', $student),
             'student' => $student
         ]);
