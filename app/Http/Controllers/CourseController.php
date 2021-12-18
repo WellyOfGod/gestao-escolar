@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CourseStoreRequest;
+use App\Models\Discipline;
+use App\Http\Requests\{CourseStoreRequest, AddDisciplineCourseRequest};
 use App\Models\Course;
 
 class CourseController extends Controller
@@ -47,4 +48,5 @@ class CourseController extends Controller
 
         return redirect()->route('course.create');
     }
+
 }
