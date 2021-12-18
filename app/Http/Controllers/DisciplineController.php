@@ -25,7 +25,7 @@ class DisciplineController extends Controller
         $discipline = new Fluent();
         $discipline->course = new Fluent();
 
-        return view('pages.admin.crud_disciplines',
+        return view('pages.admin.discipline.crud_disciplines',
             $this->viewParams(route('discipline.store'), $discipline));
     }
 
@@ -42,7 +42,7 @@ class DisciplineController extends Controller
 
     public function edit(Discipline $discipline)
     {
-        return view('pages.admin.crud_disciplines',
+        return view('pages.admin.discipline.crud_disciplines',
             $this->viewParams(route('discipline.update', $discipline), $discipline));
     }
 
