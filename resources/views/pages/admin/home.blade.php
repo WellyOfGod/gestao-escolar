@@ -1,10 +1,9 @@
 @extends('layouts.main.layout')
 @section('content')
-    <h2 class="section-title">This is Example Page</h2>
-    <p class="section-lead">This page is just an example for you to create your own page.</p>
     <div class="card">
         <div class="card-header">
-            <h4>Example Card</h4>
+            <h2 class="section-title">This is Example Page</h2>
+            <p class="section-lead">This page is just an example for you to create your own page.</p>
         </div>
         <div class="card-body">
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

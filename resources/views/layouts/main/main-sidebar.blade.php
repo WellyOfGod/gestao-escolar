@@ -7,16 +7,23 @@
             <a href="index.html">GE</a>
         </div>
         <ul class="sidebar-menu">
-            <li class="menu-header">Educacional</li>
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>CADASTRO</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{route('student.create')}}">Aluno</a></li>
-                    <li><a class="nav-link" href="{{route('course.create')}}">Curso</a></li>
-                    <li><a class="nav-link" href="{{route('discipline.create')}}">Disciplina</a></li>
-                    <li><a class="nav-link" href="{{route('activity.create')}}">Atividade</a></li>
-                </ul>
-            </li>
+            @foreach(menuList()->toArray() as $menu)
+                <li class="menu-header">{{$menu['menu-header']}}</li>
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link has-dropdown">
+                        <i class="fas fa-fire"></i><span>{{$menu['dropdown']['nav-link']}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @foreach($menu['dropdown']['dropdown-menu'] as $navLink)
+                            <li>
+                                <a class="nav-link" href="{{ route($navLink['routeName']) }}">
+                                    {{$navLink['menuLink']}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+            @endforeach
         </ul>
 
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

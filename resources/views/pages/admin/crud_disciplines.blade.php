@@ -1,31 +1,32 @@
 @extends('layouts.main.layout')
-@section('title', 'Cadastrar Curso')
+@section('title', 'Cadastrar Disciplina')
 @section('content')
     <div class="section-body">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <form id="form-save" action="{{ $route }}" method="POST" enctype="multipart/form-data">
-                        @if(request()->routeIs('course.edit'))
+                        @if(request()->routeIs('discipline.edit'))
                             @method('PUT')
                         @endif
                         @csrf
                         <div class="card-header d-flex justify-content-between">
-                            @isset($course->id)
-                            <h4>Atualizar Informações do Curso</h4>
-                                <a class="btn btn-primary text-white"  href="{{ route('course.create') }}">
-                                    Cadastrar Novo Curso
+                            @isset($discipline->id)
+                                <h4>Atualizar Informações da Disciplina</h4>
+                                <a class="btn btn-primary text-white" href="{{ route('discipline.create') }}">
+                                    Cadastrar Nova Disciplina
                                 </a>
                             @else
-                            <h4>Informações do Curso</h4>
+                                <h4>Informações da Disciplina</h4>
                             @endisset
+                                <button class="btn btn-primary float-right" id="modal-1">Disciplinas Cadastradas</button>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nome</label>
                                 <input type="text" name="name"
                                        class="form-control @error('name') is-invalid @enderror"
-                                       value="{{old('name') ?? $course->name ?? ''}}">
+                                       value="{{old('name') ?? $discipline->name ?? ''}}">
                                 @error('name')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -33,23 +34,34 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label>Carga Horária</label>
-                                <input type="text" name="workload"
-                                       class="form-control @error('workload') is-invalid @enderror"
-                                       value="{{old('workload') ?? $course->workload ?? ''}}">
-                                @error('workload')
+                                <label>Selecionar Curso</label>
+                                <select name="course_id" id="course_id"
+                                        class="form-control @error('course_id') is-invalid @enderror">
+                                    <option selected value="">Selecione</option>
+                                    @forelse($courses as $course)
+                                        <option value="{{ $course->id }}"
+                                                @if (old('course_id', $discipline->course_id) == $course->id) selected @endif>
+                                            {{ $course->name }}</option>
+                                    @empty
+                                        <option selected disabled>Nenhum curso cadastrado</option>
+                                    @endforelse
+                                </select>
+                                @error('course_id')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
+                        </div>
                     </form>
                     <div class="card-footer d-flex justify-content-between">
-                        @isset($course->id)
+                        @isset($discipline->id)
                             <form action="{{ $route }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-delete">Deletar Curso</button>
+                                <button type="submit"
+                                        class="btn btn-danger btn-delete">Deletar Disciplina
+                                </button>
                             </form>
                         @endisset
                         <button form="form-save" class="btn btn-primary">Salvar</button>

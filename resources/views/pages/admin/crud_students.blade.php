@@ -1,22 +1,23 @@
 @extends('layouts.main.layout')
+@section('title', 'Cadastrar Aluno')
 @section('content')
     <div class="section-body">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
+                    <form id="form-save" action="{{ $route }}" method="POST" enctype="multipart/form-data">
                         @if(request()->routeIs('student.edit'))
                             @method('PUT')
                         @endif
                         @csrf
                         <div class="card-header d-flex justify-content-between">
                             @isset($student->id)
-                            <h4>Atualizar Dados do Aluno</h4>
-                                <a class="btn btn-primary text-white"  href="{{ route('student.create') }}">
+                                <h4>Atualizar Dados do Aluno</h4>
+                                <a class="btn btn-primary text-white" href="{{ route('student.create') }}">
                                     Cadastrar Novo Aluno
                                 </a>
                             @else
-                            <h4>Dados do Aluno</h4>
+                                <h4>Dados do Aluno</h4>
                             @endisset
                         </div>
                         <div class="card-body">
@@ -45,7 +46,8 @@
                             <div class="form-group">
                                 <label>CPF</label>
                                 <input type="text" name="cpf"
-                                       class="form-control @error('cpf') is-invalid @enderror" placeholder="999.999.999-99"
+                                       class="form-control @error('cpf') is-invalid @enderror"
+                                       placeholder="999.999.999-99"
                                        value="{{old('cpf') ?? $student->cpf ?? ''}}">
                                 @error('cpf')
                                 <div class="invalid-feedback">
@@ -127,13 +129,15 @@
                     </form>
                     <div class="card-footer d-flex justify-content-between">
                         @isset($student->id)
-                            <form action="{{ $route }}" method="post">
+                            <form id="delete-form" action="{{ $route }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-delete">Deletar Aluno</button>
+                                <button form="delete-form" type="submit" class="btn btn-danger btn-delete">Deletar
+                                    Aluno
+                                </button>
                             </form>
                         @endisset
-                        <button class="btn btn-primary">Salvar</button>
+                        <button form="form-save" type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                 </div>
             </div>
