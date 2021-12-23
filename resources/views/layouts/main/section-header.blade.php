@@ -1,5 +1,4 @@
 @php
-
     $currentPage = '';
     $page = menuList()
         ->filter(function($value) use(&$currentPage)
@@ -17,18 +16,12 @@
         });
 @endphp
 @if($page->isNotEmpty())
-    <div class="section-header">
-        <h1>@yield('title')</h1>
-        <div class="section-header-breadcrumb">
-            <div class="breadcrumb-item">
-                {{ $page[0]['menu-header'] }}
-            </div>
-            <div class="breadcrumb-item">
-                {{ $page[0]['dropdown']['nav-link'] }}
-            </div>
-            <div class="breadcrumb-item">
-                {{ $currentPage }}
-            </div>
-        </div>
-    </div>
+    @component('components.section-header', [
+        'menuHeader'    => $page[0]['menu-header'] ,
+        'navLink'       => $page[0]['dropdown']['nav-link'],
+        'currentPage'   => $currentPage,
+    ])
+    @endcomponent
+@else
+    @yield('custom-section-header')
 @endif
