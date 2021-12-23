@@ -5,21 +5,43 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Discipline\DisciplineStoreRequest;
 use App\Models\Course;
 use App\Models\Discipline;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Fluent;
 
 class DisciplineController extends Controller
 {
 
+    /**
+     * @param string $route
+     * @param $discipline
+     * @return array
+     */
     private function viewParams(string $route, $discipline): array
     {
         return [
-            'route'          => $route,
-            'courses'        => Course::all(['id', 'name']),
-            'discipline'     => $discipline
+            'route' => $route,
+            'courses' => Course::all(['id', 'name']),
+            'discipline' => $discipline
         ];
     }
 
-    public function create()
+
+    /**
+     * @return View
+     */
+    public function index(): View
+    {
+        return view('pages.admin.discipline.disciplines_registered');
+    }
+
+
+    /**
+     * @return View
+     */
+    public function create(): View
     {
 
         $discipline = new Fluent();
@@ -30,7 +52,11 @@ class DisciplineController extends Controller
     }
 
 
-    public function store(DisciplineStoreRequest $request)
+    /**
+     * @param DisciplineStoreRequest $request
+     * @return RedirectResponse
+     */
+    public function store(DisciplineStoreRequest $request): RedirectResponse
     {
         $data = new Fluent($request->validated());
 
@@ -40,14 +66,23 @@ class DisciplineController extends Controller
     }
 
 
-    public function edit(Discipline $discipline)
+    /**
+     * @param Discipline $discipline
+     * @return View
+     */
+    public function edit(Discipline $discipline): View
     {
         return view('pages.admin.discipline.crud_disciplines',
             $this->viewParams(route('discipline.update', $discipline), $discipline));
     }
 
 
-    public function update(DisciplineStoreRequest $request, Discipline $discipline)
+    /**
+     * @param DisciplineStoreRequest $request
+     * @param Discipline $discipline
+     * @return RedirectResponse
+     */
+    public function update(DisciplineStoreRequest $request, Discipline $discipline): RedirectResponse
     {
         $data = new Fluent($request->validated());
         $discipline->load('course');
@@ -58,7 +93,11 @@ class DisciplineController extends Controller
     }
 
 
-    public function destroy(Discipline $discipline)
+    /**
+     * @param Discipline $discipline
+     * @return RedirectResponse
+     */
+    public function destroy(Discipline $discipline): RedirectResponse
     {
         $discipline->delete();
 
