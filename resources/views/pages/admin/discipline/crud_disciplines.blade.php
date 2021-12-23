@@ -1,5 +1,19 @@
 @extends('layouts.main.layout')
-@section('title', 'Cadastrar Disciplina')
+
+@if(request()->routeIs('discipline.edit'))
+    @section('custom-section-header')
+        @component('components.section-header', [
+            'title'         => 'Editar Disciplina - '. $discipline->name,
+            'menuHeader'    => 'Educacional' ,
+            'navLink'       => 'Cadastro',
+            'currentPage'   => 'Disciplina',
+        ])
+        @endcomponent
+    @endsection
+@else
+    @section('title', 'Cadastrar Disciplina')
+@endif
+
 @section('content')
     <div class="section-body">
         <div class="row">
@@ -19,7 +33,9 @@
                             @else
                                 <h4>Informações da Disciplina</h4>
                             @endisset
-                                <button class="btn btn-primary float-right" id="modal-1">Disciplinas Cadastradas</button>
+                            <a href="{{ route('discipline.index') }}" class="btn btn-primary float-right">
+                                Disciplinas Cadastradas
+                            </a>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
