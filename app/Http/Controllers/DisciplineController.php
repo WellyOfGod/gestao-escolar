@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Discipline\DisciplineStoreRequest;
-use App\Models\Course;
-use App\Models\Discipline;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
+use App\Models\{Course, Discipline};
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Fluent;

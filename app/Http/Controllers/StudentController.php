@@ -4,25 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StudentStoreRequest;
 use App\Models\Student;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class StudentController extends Controller
 {
 
-    public function index()
+    /**
+     * @return View
+     */
+    public function index(): View
     {
-        //
+        return view('pages.admin.student.crud_students');
     }
 
 
-    public function create()
+    /**
+     * @return View
+     */
+    public function create(): View
     {
-        return view('pages.admin.crud_students', [
+        return view('pages.admin.student.crud_students', [
             'route'   => route('student.store'),
         ]);
     }
 
 
-    public function store(StudentStoreRequest $request)
+    /**
+     * @param StudentStoreRequest $request
+     * @return RedirectResponse
+     */
+    public function store(StudentStoreRequest $request): RedirectResponse
     {
         $student = Student::create($request->validated());
 
@@ -30,22 +42,25 @@ class StudentController extends Controller
     }
 
 
-    public function show($id)
+    /**
+     * @param Student $student
+     * @return View
+     */
+    public function edit(Student $student): View
     {
-
-    }
-
-
-    public function edit(Student $student)
-    {
-        return view('pages.admin.crud_students', [
+        return view('pages.admin.student.crud_students', [
             'route'   => route('student.update', $student),
             'student' => $student
         ]);
     }
 
 
-    public function update(StudentStoreRequest $request, Student $student)
+    /**
+     * @param StudentStoreRequest $request
+     * @param Student $student
+     * @return RedirectResponse
+     */
+    public function update(StudentStoreRequest $request, Student $student): RedirectResponse
     {
         $student->update($request->validated());
 
@@ -53,7 +68,11 @@ class StudentController extends Controller
     }
 
 
-    public function destroy(Student $student)
+    /**
+     * @param Student $student
+     * @return RedirectResponse
+     */
+    public function destroy(Student $student): RedirectResponse
     {
         $student->delete();
 

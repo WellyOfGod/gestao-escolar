@@ -1,5 +1,19 @@
 @extends('layouts.main.layout')
-@section('title', 'Cadastrar Aluno')
+
+@if(request()->routeIs('student.edit'))
+@section('custom-section-header')
+    @component('components.section-header', [
+        'title'         => 'Editar Informações do Aluno - '. $student->name,
+        'menuHeader'    => 'Educacional' ,
+        'navLink'       => 'Cadastro',
+        'currentPage'   => 'Aluno',
+    ])
+    @endcomponent
+@endsection
+@else
+    @section('title', 'Cadastrar Aluno')
+@endif
+
 @section('content')
     <div class="section-body">
         <div class="row">
@@ -10,16 +24,23 @@
                             @method('PUT')
                         @endif
                         @csrf
-                        <div class="card-header d-flex justify-content-between">
-                            @isset($student->id)
-                                <h4>Atualizar Dados do Aluno</h4>
+                        @isset($student->id)
+                            <div class="card-header d-flex justify-content-between">
                                 <a class="btn btn-primary text-white" href="{{ route('student.create') }}">
-                                    Cadastrar Novo Aluno
+                                    Cadastrar Aluno
                                 </a>
-                            @else
-                                <h4>Dados do Aluno</h4>
-                            @endisset
-                        </div>
+                                <a href="{{ route('student.index') }}" class="btn btn-primary">
+                                    Ver Alunos
+                                </a>
+                            </div>
+                        @else
+                            <div class="card-header d-flex justify-content-between">
+                                <h4>Informações do Aluno</h4>
+                                <a href="{{ route('student.index') }}" class="btn btn-primary">
+                                    Ver Alunos
+                                </a>
+                            </div>
+                        @endisset
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nome</label>
@@ -127,18 +148,24 @@
                             </div>
                         </div>
                     </form>
-                    <div class="card-footer d-flex justify-content-between">
-                        @isset($student->id)
-                            <form id="delete-form" action="{{ $route }}" method="post">
+                    @isset($student->id)
+                        <div class="card-footer d-flex justify-content-between">
+                            <form action="{{ $route }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button form="delete-form" type="submit" class="btn btn-danger btn-delete">Deletar
-                                    Aluno
+                                <button type="submit"
+                                        class="btn btn-danger btn-delete">Deletar
                                 </button>
                             </form>
-                        @endisset
-                        <button form="form-save" type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
+                            <button form="form-save" class="btn btn-primary">Salvar</button>
+                        </div>
+                    @else
+                        <div class="d-flex justify-content-end">
+                            <div class="card-footer d-flex justify-content-end">
+                                <button form="form-save" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+                    @endisset
                 </div>
             </div>
         </div>
