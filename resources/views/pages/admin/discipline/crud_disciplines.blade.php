@@ -1,15 +1,15 @@
 @extends('layouts.main.layout')
 
 @if(request()->routeIs('discipline.edit'))
-    @section('custom-section-header')
-        @component('components.section-header', [
-            'title'         => 'Editar Disciplina - '. $discipline->name,
-            'menuHeader'    => 'Educacional' ,
-            'navLink'       => 'Cadastro',
-            'currentPage'   => 'Disciplina',
-        ])
-        @endcomponent
-    @endsection
+@section('custom-section-header')
+    @component('components.section-header', [
+        'title'         => 'Editar Disciplina - '. $discipline->name,
+        'menuHeader'    => 'Educacional' ,
+        'navLink'       => 'Cadastro',
+        'currentPage'   => 'Disciplina',
+    ])
+    @endcomponent
+@endsection
 @else
     @section('title', 'Cadastrar Disciplina')
 @endif
@@ -24,19 +24,23 @@
                             @method('PUT')
                         @endif
                         @csrf
-                        <div class="card-header d-flex justify-content-between">
-                            @isset($discipline->id)
-                                <h4>Atualizar Informações da Disciplina</h4>
+                        @isset($discipline->id)
+                            <div class="card-header d-flex justify-content-between">
                                 <a class="btn btn-primary text-white" href="{{ route('discipline.create') }}">
-                                    Cadastrar Nova Disciplina
+                                    Cadastrar Disciplina
                                 </a>
-                            @else
+                                <a href="{{ route('discipline.index') }}" class="btn btn-primary float-right">
+                                    Ver Disciplinas
+                                </a>
+                            </div>
+                        @else
+                            <div class="card-header d-flex justify-content-between">
                                 <h4>Informações da Disciplina</h4>
-                            @endisset
-                            <a href="{{ route('discipline.index') }}" class="btn btn-primary float-right">
-                                Disciplinas Cadastradas
-                            </a>
-                        </div>
+                                <a href="{{ route('discipline.index') }}" class="btn btn-primary float-right">
+                                    Ver Disciplinas
+                                </a>
+                            </div>
+                        @endisset
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nome</label>
@@ -70,18 +74,24 @@
                             </div>
                         </div>
                     </form>
-                    <div class="card-footer d-flex justify-content-between">
-                        @isset($discipline->id)
+                    @isset($discipline->id)
+                        <div class="card-footer d-flex justify-content-between">
                             <form action="{{ $route }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                        class="btn btn-danger btn-delete">Deletar Disciplina
+                                        class="btn btn-danger btn-delete">Deletar
                                 </button>
                             </form>
-                        @endisset
-                        <button form="form-save" class="btn btn-primary">Salvar</button>
-                    </div>
+                            <button form="form-save" class="btn btn-primary">Salvar</button>
+                        </div>
+                    @else
+                        <div class="d-flex justify-content-end">
+                            <div class="card-footer d-flex justify-content-end">
+                                <button form="form-save" class="btn btn-primary">Salvar</button>
+                            </div>
+                        </div>
+                    @endisset
                 </div>
             </div>
         </div>
