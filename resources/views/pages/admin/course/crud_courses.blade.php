@@ -24,7 +24,7 @@
                             @method('PUT')
                         @endif
                         @csrf
-                        @isset($discipline->id)
+                        @isset($course->id)
                             <div class="card-header d-flex justify-content-between">
                                 <a class="btn btn-primary text-white" href="{{ route('course.create') }}">
                                     Cadastrar Curso
