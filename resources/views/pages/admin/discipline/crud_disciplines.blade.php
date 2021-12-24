@@ -29,14 +29,14 @@
                                 <a class="btn btn-primary text-white" href="{{ route('discipline.create') }}">
                                     Cadastrar Disciplina
                                 </a>
-                                <a href="{{ route('discipline.index') }}" class="btn btn-primary float-right">
+                                <a href="{{ route('discipline.index') }}" class="btn btn-primary">
                                     Ver Disciplinas
                                 </a>
                             </div>
                         @else
                             <div class="card-header d-flex justify-content-between">
                                 <h4>Informações da Disciplina</h4>
-                                <a href="{{ route('discipline.index') }}" class="btn btn-primary float-right">
+                                <a href="{{ route('discipline.index') }}" class="btn btn-primary">
                                     Ver Disciplinas
                                 </a>
                             </div>
@@ -60,8 +60,11 @@
                                     <option selected value="">Selecione</option>
                                     @forelse($courses as $course)
                                         <option value="{{ $course->id }}"
-                                                @if (old('course_id', $discipline->course_id) == $course->id) selected @endif>
-                                            {{ $course->name }}</option>
+                                            @if (old('course_id', $discipline->course_id) === $course->id)
+                                                selected
+                                            @endif>
+                                            {{ $course->name }}
+                                        </option>
                                     @empty
                                         <option selected disabled>Nenhum curso cadastrado</option>
                                     @endforelse
