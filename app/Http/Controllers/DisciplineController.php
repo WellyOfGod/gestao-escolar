@@ -6,6 +6,7 @@ use App\Http\Requests\Discipline\DisciplineStoreRequest;
 use App\Models\{Course, Discipline};
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Fluent;
 
 class DisciplineController extends Controller
@@ -31,7 +32,18 @@ class DisciplineController extends Controller
      */
     public function index(): View
     {
-        return view('pages.admin.discipline.disciplines_registered');
+        $disciplines = Discipline::query()
+            ->select('name', 'course_id')
+            ->with([
+                'course:id,name',
+            ])
+            ->orderBy('course_id')
+            ->paginate(10);
+
+        return view('pages.admin.discipline.disciplines_registered',
+            [
+                'disciplines' => $disciplines,
+            ]);
     }
 
 
