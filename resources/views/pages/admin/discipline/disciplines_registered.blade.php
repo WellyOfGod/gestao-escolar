@@ -1,5 +1,16 @@
 @extends('layouts.main.layout')
-@section('title', 'Disciplinas Cadastradas')
+
+@section('custom-section-header')
+    @component('components.section-header', [
+        'title'         => 'Disciplinas Cadastradas',
+        'menuHeader'    => 'Educacional' ,
+        'navLink'       => 'Cadastro',
+        'currentPage'   => 'Disciplina',
+    ])
+    @endcomponent
+@endsection
+@section('title', 'Cadastrar Disciplina')
+
 @section('content')
     <div class="section-body">
         <div class="row">
@@ -10,64 +21,23 @@
                         <table class="table table-borderless">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
+                                <th scope="col">Disciplina</th>
+                                <th scope="col">Curso</th>
+                                <th scope="col">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @foreach($disciplines as $discipline)
+                                <tr>
+                                    {{--                                <th scope="row">1</th>--}}
+                                    <td>{{ $discipline->name }}</td>
+                                    <td>{{ $discipline->course->name }}</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
-                        <div class="section-title">Dark</div>
-                        <table class="table table-borderless table-dark">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        {!! $disciplines->links() !!}
                     </div>
                 </div>
             </div>
