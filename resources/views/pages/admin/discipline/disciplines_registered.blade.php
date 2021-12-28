@@ -29,7 +29,6 @@
                             <tbody>
                             @foreach($disciplines as $discipline)
                                 <tr>
-                                    {{--                                <th scope="row">1</th>--}}
                                     <td>{{ $discipline->name }}</td>
                                     <td>{{ $discipline->course->name }}</td>
                                     <td>@mdo</td>
