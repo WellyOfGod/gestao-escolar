@@ -36,7 +36,10 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {!! $disciplines->links() !!}
+                        @component('components.paginator', [
+                                'paginator' => $disciplines
+                            ])
+                        @endcomponent
                     </div>
                 </div>
             </div>
