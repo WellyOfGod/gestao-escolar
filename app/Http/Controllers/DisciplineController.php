@@ -33,7 +33,7 @@ class DisciplineController extends Controller
     public function index(): View
     {
         $disciplines = Discipline::query()
-            ->select('name', 'course_id')
+            ->select('name', 'id', 'course_id')
             ->with([
                 'course:id,name',
             ])
@@ -110,7 +110,7 @@ class DisciplineController extends Controller
     {
         $discipline->delete();
 
-        return redirect()->route('discipline.create');
+        return redirect()->route('discipline.index');
     }
 
 }
