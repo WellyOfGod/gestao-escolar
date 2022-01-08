@@ -30,14 +30,14 @@
                                     Cadastrar Curso
                                 </a>
                                 <a href="{{ route('course.index') }}" class="btn btn-primary float-right">
-                                    Ver Cursos
+                                    Cursos Cadastrados
                                 </a>
                             </div>
                         @else
                             <div class="card-header d-flex justify-content-between">
                                 <h4>Informações do Curso</h4>
                                 <a href="{{ route('course.index') }}" class="btn btn-primary float-right">
-                                    Ver Cursos
+                                    Cursos Cadastrados
                                 </a>
                             </div>
                         @endisset

@@ -21,8 +21,8 @@
                             Cadastrar Disciplina
                         </a>
                     </div>
-                    <div class="card-body">
-                        <table class="table table-borderless">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
                             <thead>
                             <tr class="text-center">
                                 <th scope="col">Disciplina</th>

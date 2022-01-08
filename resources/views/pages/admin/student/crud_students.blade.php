@@ -30,14 +30,14 @@
                                     Cadastrar Aluno
                                 </a>
                                 <a href="{{ route('student.index') }}" class="btn btn-primary">
-                                    Ver Alunos
+                                    Alunos Cadastrados
                                 </a>
                             </div>
                         @else
                             <div class="card-header d-flex justify-content-between">
                                 <h4>Informações do Aluno</h4>
                                 <a href="{{ route('student.index') }}" class="btn btn-primary">
-                                    Ver Alunos
+                                    Alunos Cadastrados
                                 </a>
                             </div>
                         @endisset

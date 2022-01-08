@@ -30,14 +30,14 @@
                                     Cadastrar Disciplina
                                 </a>
                                 <a href="{{ route('discipline.index') }}" class="btn btn-primary">
-                                    Ver Disciplinas
+                                    Disciplinas Cadastradas
                                 </a>
                             </div>
                         @else
                             <div class="card-header d-flex justify-content-between">
                                 <h4>Informações da Disciplina</h4>
                                 <a href="{{ route('discipline.index') }}" class="btn btn-primary">
-                                    Ver Disciplinas
+                                    Disciplinas Cadastradas
                                 </a>
                             </div>
                         @endisset

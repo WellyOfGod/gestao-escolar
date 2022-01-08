@@ -15,7 +15,15 @@ class CourseController extends Controller
      */
     public function index(): View
     {
-        return view('pages.admin.course.course_registered');
+        $courses = Course::query()
+            ->select('id', 'name', 'workload')
+            ->orderBy('name')
+            ->paginate(10);
+
+        return view('pages.admin.course.course_registered',
+            [
+                'courses' => $courses,
+            ]);
     }
 
 
@@ -75,7 +83,7 @@ class CourseController extends Controller
     {
         $course->delete();
 
-        return redirect()->route('course.create');
+        return redirect()->route('course.index');
     }
 
 }

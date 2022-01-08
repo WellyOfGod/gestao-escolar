@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StudentStoreRequest;
+use App\Http\Requests\Student\StudentStoreRequest;
 use App\Models\Student;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -15,7 +15,27 @@ class StudentController extends Controller
      */
     public function index(): View
     {
-        return view('pages.admin.student.crud_students');
+        $students = Student::query()
+            ->select
+            (
+                'id',
+                'name',
+                'email',
+                'cpf',
+                'dt_birth',
+                'zipcode',
+                'street',
+                'complement',
+                'district',
+                'uf',
+            )
+            ->orderBy('name')
+            ->paginate(10);
+
+        return view('pages.admin.student.student_registered',
+            [
+                'students' => $students,
+            ]);
     }
 
 
@@ -76,6 +96,6 @@ class StudentController extends Controller
     {
         $student->delete();
 
-        return redirect()->route('student.create');
+        return redirect()->route('student.index');
     }
 }
